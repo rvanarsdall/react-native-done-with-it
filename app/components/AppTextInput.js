@@ -9,13 +9,17 @@ const AppTextInput = (props) => {
     <View style={styles.container}>
       {icon && (
         <MaterialCommunityIcons
-          name="email"
+          name={icon}
           size={20}
           color={colors.medium}
           style={styles.icon}
         />
       )}
-      <TextInput style={defaultStyles.text} {...otherProps} />
+      <TextInput
+        style={defaultStyles.text}
+        {...otherProps}
+        placeholderTextColor={colors.medium}
+      />
     </View>
   );
 };
