@@ -22,6 +22,7 @@ const AppPicker = (props) => {
     icon,
     placeholder,
     items,
+    numberOfColumns = 1,
     PickerItemComponent = PickerItem,
     selectedItem,
     onSelectItem,
@@ -61,10 +62,12 @@ const AppPicker = (props) => {
         <Screen>
           <Button title="Close" onPress={() => setShowModal(false)} />
           <FlatList
+            numColumns={numberOfColumns}
             data={items}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
               <PickerItemComponent
+                item={item}
                 label={item.label}
                 onPress={() => {
                   console.log(item);
