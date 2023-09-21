@@ -22,15 +22,18 @@ const AppPicker = (props) => {
     icon,
     placeholder,
     items,
+    PickerItemComponent = PickerItem,
     selectedItem,
     onSelectItem,
+    width = "100%",
     ...otherProps
   } = props;
   const [showModal, setShowModal] = useState(false);
+  console.log([styles.container, width]);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -61,7 +64,7 @@ const AppPicker = (props) => {
             data={items}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
                 label={item.label}
                 onPress={() => {
                   console.log(item);
@@ -81,10 +84,9 @@ export default AppPicker;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },

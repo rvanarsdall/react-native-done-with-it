@@ -36,22 +36,14 @@ export default function App() {
   const [category, setCategory] = useState(categories[0]);
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {/* <ListingEditScreen /> */}
+      <ListingEditScreen />
       {/* <RegisterScreen /> */}
       {/* <LoginScreen /> */}
-      {/* <AppPicker
-          placeholder="Category"
-          icon="apps"
-          items={categories}
-          selectedItem={category}
-          onSelectItem={(item) => setCategory(item)}
-        />
-        <AppTextInput placeholder="Email" icon="email" /> */}
       {/* <AppTextInput placeholder="Username" icon="email" /> */}
       <>
         {/* <WelcomeScreen /> */}
         {/* <ViewImagePage /> */}
-        <MessagesScreen />
+        {/* <MessagesScreen /> */}
         {/* <AccountDetailsScreen /> */}
         {/* <ListingScreen /> */}
 

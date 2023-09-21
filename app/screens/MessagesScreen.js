@@ -12,7 +12,6 @@ import ListItemSeparator from "../components/ListItemSeparator";
 import ListItemDeleteAction from "../components/ListItemDeleteAction";
 import React, { useState } from "react";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 const data = [
   {
     id: 1,
