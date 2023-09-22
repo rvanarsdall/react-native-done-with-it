@@ -19,7 +19,7 @@ const RegisterScreen = (props) => {
         <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
         <AppForm
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: "", password: "", name: "" }}
           onSubmit={(values) => console.log(values)}
           validationSchema={validationSchema}
         >
@@ -39,7 +39,7 @@ const RegisterScreen = (props) => {
             textContentType="emailAddress"
             name="email"
           />
-          <AppTextInput
+          <AppFormField
             placeholder="Password"
             icon="lock"
             autoCapitalize="none"

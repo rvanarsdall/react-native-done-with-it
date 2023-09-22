@@ -1,6 +1,6 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import AccountDetailsScreen from "./app/screens/AccountsDetailsScreen";
 import AppPicker from "./app/components/AppPicker";
 import AppText from "./app/components/AppText";
@@ -17,26 +17,45 @@ import ViewImagePage from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
-const categories = [
-  {
-    label: "Furniture",
-    value: 1,
-  },
-  {
-    label: "Clothing",
-    value: 2,
-  },
-  {
-    label: "Cameras",
-    value: 3,
-  },
-];
+import * as Permissions from "expo-permissions";
+import { useEffect } from "react";
+import * as ImagePicker from "expo-image-picker";
+import * as Camera from "expo-camera";
+import * as Location from "expo-location";
+import ImageInput from "./app/components/ImageInput";
 
 export default function App() {
-  const [category, setCategory] = useState(categories[0]);
+  const [imageUri, setImageUri] = useState();
+  async function requestPermission() {
+    // const cameraResult = await Camera.requestCameraPermissionsAsync();
+    // console.log("cameraResult", cameraResult);
+    const result = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!result.granted) {
+      alert("You need to enable permission to access the library");
+    }
+  }
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync();
+
+      if (!result.canceled) {
+        console.log("result", result);
+        setImageUri(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ListingEditScreen />
+      {/* <ListingEditScreen /> */}
       {/* <RegisterScreen /> */}
       {/* <LoginScreen /> */}
       {/* <AppTextInput placeholder="Username" icon="email" /> */}
@@ -48,6 +67,12 @@ export default function App() {
         {/* <ListingScreen /> */}
 
         {/* <ListingDetailsScreen title={"Red jacket for sale"} price={"$100"} /> */}
+        <Screen>
+          <ImageInput
+            imageUri={imageUri}
+            onChangeImage={(uri) => setImageUri(uri)}
+          />
+        </Screen>
         <StatusBar style="auto" />
       </>
     </GestureHandlerRootView>
